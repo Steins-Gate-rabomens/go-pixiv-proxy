@@ -134,9 +134,9 @@ func checkEnv() {
 }
 
 func init() {
-	flag.StringVar(&host, "h", "localhost", "host")
 	flag.StringVar(&domain, "d", "", "your domain")
 	port = os.Getenv("PORT")
+	host = ""
 	log.SetFormatter(&easy.Formatter{
 		TimestampFormat: "2006-01-02 15:04:05",
 		LogFormat:       "[%lvl%][%time%]: %msg% \n",
