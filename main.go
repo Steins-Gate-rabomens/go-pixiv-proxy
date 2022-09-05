@@ -56,7 +56,7 @@ func handlePixivProxy(rw http.ResponseWriter, req *http.Request) {
 		handleIllustInfo(c)
 		return
 	case "artworks":
-		handleIllustInfo(c)
+		handleArtworks(c)
 		return
 	}
 	imgType := req.URL.Query().Get("t")
