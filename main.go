@@ -55,6 +55,9 @@ func handlePixivProxy(rw http.ResponseWriter, req *http.Request) {
 	case "api":
 		handleIllustInfo(c)
 		return
+	case "artworks":
+		handleIllustInfo(c)
+		return
 	}
 	imgType := req.URL.Query().Get("t")
 	if imgType == "" {
@@ -97,6 +100,13 @@ func handleIllustInfo(c *Context) {
 		return
 	}
 	proxyHttpReq(c, "https://www.pixiv.net/ajax/illust/"+pid, "pixiv api error")
+}
+
+func handleArtworks(c *Context) {
+	params := strings.Split(c.req.URL.Path, "/")
+	keyword := params[len(params)-1]
+	url := fmt.Sprintf("https://www.pixiv.net/ajax/search/artworks/%s", keyword)
+	proxyHttpReq(c, url, "pixiv api error")
 }
 
 func getIllust(pid string) (*Illust, error) {
