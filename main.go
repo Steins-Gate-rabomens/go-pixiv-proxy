@@ -116,7 +116,11 @@ func handleArtworks(c *Context) {
 	if p, err := strconv.Atoi(c.req.URL.Query().Get("p")); err == nil {
 		page = p
 	}
-	url := fmt.Sprintf("https://www.pixiv.net/ajax/search/artworks/%s?p=%d", keyword, page)
+	order := c.req.URL.Query().Get("order")
+	if order != "popular_d" {
+		order = "date_d"
+	}
+	url := fmt.Sprintf("https://www.pixiv.net/ajax/search/artworks/%s?p=%d&order=%s", keyword, page, order)
 	proxyHttpReq(c, url, "pixiv api error")
 }
 
