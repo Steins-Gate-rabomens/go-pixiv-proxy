@@ -23,6 +23,10 @@
     
     例子：https://okabebot-pixiv.herokuapp.com/101021356?t=thumb
 
+3. 支持根据关键词搜索作品(使用p指定页码，从1开始)
+   例子：https://okabebot-pixiv.herokuapp.com/artworks/甘雨?2
+
+
 <div>			<!--块级封装-->
     <div style="text-align: center;">	<!--将图片和文字居中-->
     <img src="https://okabebot-pixiv.herokuapp.com/101021356"

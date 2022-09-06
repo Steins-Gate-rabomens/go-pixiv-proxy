@@ -112,7 +112,11 @@ func handleIllustInfo(c *Context) {
 func handleArtworks(c *Context) {
 	params := strings.Split(c.req.URL.Path, "/")
 	keyword := params[len(params)-1]
-	url := fmt.Sprintf("https://www.pixiv.net/ajax/search/artworks/%s", keyword)
+	page := 1
+	if p, err := strconv.Atoi(c.req.URL.Query().Get("p")); err == nil {
+		page = p
+	}
+	url := fmt.Sprintf("https://www.pixiv.net/ajax/search/artworks/%s?p=%d", keyword, page)
 	proxyHttpReq(c, url, "pixiv api error")
 }
 
