@@ -65,6 +65,9 @@ func handlePixivProxy(rw http.ResponseWriter, req *http.Request) {
 	case "artworks":
 		handleArtworks(c)
 		return
+	case "c":
+		handleCover(c)
+		return
 	}
 	imgType := req.URL.Query().Get("t")
 	if imgType == "" {
@@ -97,6 +100,12 @@ func handlePixivProxy(rw http.ResponseWriter, req *http.Request) {
 		}
 	}
 	proxyHttpReq(c, realUrl, "fetch pixiv image error")
+}
+
+func handleCover(c *Context) {
+	url := c.req.URL.Path
+	url = strings.Replace(url, domain, "https://i.pximg.net", 1)
+	proxyHttpReq(c, url, "pixiv api error")
 }
 
 func handleIllustInfo(c *Context) {

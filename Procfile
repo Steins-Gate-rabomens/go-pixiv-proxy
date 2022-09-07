@@ -1,1 +1,1 @@
-web: bin/go-pixiv-proxy
+web: bin/go-pixiv-proxy -d "okabebot-pixiv.herokuapp.com"
