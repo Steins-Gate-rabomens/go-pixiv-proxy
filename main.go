@@ -9,6 +9,7 @@ import (
 	"github.com/tidwall/gjson"
 	"net/http"
 	"os"
+	"path"
 	"strconv"
 	"strings"
 )
@@ -103,8 +104,10 @@ func handlePixivProxy(rw http.ResponseWriter, req *http.Request) {
 }
 
 func handleCover(c *Context) {
-	url := c.req.URL.Path
-	url = strings.Replace(url, domain, "https://i.pximg.net", 1)
+	spl := strings.Split(c.req.URL.Path, "/")[1:]
+	query := strings.Join(spl, "/")
+	url := path.Join("https://i.pximg.net", query)
+	fmt.Println(url)
 	proxyHttpReq(c, url, "pixiv api error")
 }
 
